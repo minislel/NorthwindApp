@@ -24,35 +24,24 @@ namespace NorthwindApp
     {
         NorthwindEntities context = new NorthwindEntities();
         CollectionViewSource productViewSource3;
+        CollectionViewSource categoriesViewSource;
+        CollectionViewSource supplierViewSource;
         public MainWindow()
         {
             InitializeComponent();
             productViewSource3 = (CollectionViewSource)(FindResource("productViewSource3"));
+            categoriesViewSource = (CollectionViewSource)(FindResource("categoriesViewSource"));
+            supplierViewSource = (CollectionViewSource)(FindResource("supplierViewSource"));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            /*            System.Windows.Data.CollectionViewSource customerViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerViewSource")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // customerViewSource.Source = [generic data source]
-                        System.Windows.Data.CollectionViewSource customerViewSource1 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerViewSource1")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // customerViewSource1.Source = [generic data source]
-                        System.Windows.Data.CollectionViewSource productViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("productViewSource")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // productViewSource.Source = [generic data source]
-                        System.Windows.Data.CollectionViewSource productViewSource1 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("productViewSource1")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // productViewSource1.Source = [generic data source]
-                        System.Windows.Data.CollectionViewSource productViewSource2 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("productViewSource2")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // productViewSource2.Source = [generic data source]
-                        System.Windows.Data.CollectionViewSource productViewSource3 = ((System.Windows.Data.CollectionViewSource)(this.FindResource("productViewSource3")));
-                        // Load data by setting the CollectionViewSource.Source property:
-                        // productViewSource3.Source = [generic data source]*/
             context.Products.Load();
+            context.Categories.Load();
+            context.Suppliers.Load();
             productViewSource3.Source = context.Products.Local;
+            categoriesViewSource.Source = context.Categories.Local;
+            supplierViewSource.Source= context.Suppliers.Local;
             this.SizeToContent = SizeToContent.Width;
         }
 
@@ -61,7 +50,40 @@ namespace NorthwindApp
             if (sender is DataGridRow row)
             {
                 IDEdit.Text = (row.Item as Product).ProductID.ToString();
+                NameEdit.Text = (row.Item as Product).ProductName.ToString();
+                QtyUnitEdit.Text = (row.Item as Product).QuantityPerUnit.ToString();
+                CategoriesComboEdit.SelectedItem = (row.Item as Product).Category;
+                StockEdit.Text = (row.Item as Product).UnitsInStock.ToString();
+                PriceEdit.Text = (row.Item as Product).UnitPrice.ToString();
+                DiscontinuedEdit.IsChecked = (row.Item as Product).Discontinued;
+                SupplierComboEdit.SelectedItem= (row.Item as Product).Supplier;
+                ReorderLevelEdit.Text = (row.Item as Product).ReorderLevel.ToString();
             }
         }
+        private void Run_Product_Query(object sender, RoutedEventArgs e)
+        {
+            Product product = new Product()
+            {
+                ProductID = int.Parse(IDEdit.Text),
+                ProductName = NameEdit.Text,
+                QuantityPerUnit = QtyUnitEdit.Text,
+                Category = CategoriesComboEdit.SelectedItem as Category,
+                UnitsInStock = short.Parse(StockEdit.Text),
+                UnitPrice = decimal.Parse(PriceEdit.Text),
+                Discontinued = (bool)DiscontinuedEdit.IsChecked,
+                Supplier = SupplierComboEdit.SelectedItem as Supplier,
+                ReorderLevel = short.Parse(ReorderLevelEdit.Text)
+            };
+            if(context.Products.Any(x => x.ProductID == product.ProductID))
+            {
+                context.Products.SqlQuery("DELETE FROM Products WHERE ProductID=" +product.ProductID);
+                context.Products.Add(product);
+            }
+            else
+            {
+                context.Products.Add(product);
+            }
+        }
+
     }
 }

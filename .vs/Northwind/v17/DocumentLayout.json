@@ -3,19 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
       "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     },
     {
@@ -29,36 +25,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 178,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
-              "RelativeToolTip": "NorthwindApp\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-07T21:51:00.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml.cs",
               "RelativeToolTip": "NorthwindApp\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAADUAAAA/AAAA",
+              "ViewState": "AQIAADcAAAAAAAAAAAAYwE4AAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-07T21:51:00.147Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Model1.edmx [Diagram1]",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Model1.edmx",
               "RelativeDocumentMoniker": "NorthwindApp\\Model1.edmx",
@@ -70,7 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "SQLQuery1.sql ",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\AppData\\Local\\Temp\\3p2zap0f..sql",
               "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\3p2zap0f..sql",
@@ -92,7 +76,7 @@
         "Y": 65,
         "Width": 800,
         "Height": 600,
-        "WindowState": 0
+        "WindowState": 2
       },
       "DocumentGroups": [
         {
@@ -101,13 +85,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
               "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
-              "RelativeToolTip": "NorthwindApp\\MainWindow.xaml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAACxAAAA",
+              "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml*",
+              "RelativeToolTip": "NorthwindApp\\MainWindow.xaml*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-06-08T11:51:47.688Z",
               "EditorCaption": ""
