@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NorthwindApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1200" Loaded="Window_Loaded">
+        Title="MainWindow" Height="650" Width="1390" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Customer}}"/>
         <CollectionViewSource x:Key="customerViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Customer}}"/>
@@ -14,10 +14,10 @@
         <CollectionViewSource x:Key="categoriesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
         <CollectionViewSource x:Key="supplierViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
     </Window.Resources>
-    <TabControl>
+    <TabControl Margin="0,0,0,-16">
         <TabItem>
             <TabItem.Header>Item Stock</TabItem.Header>
-            <Border Background="#FFECECEC" >
+            <Border Background="#FFECECEC" Margin="10,0,7,0" Height="604">
                 <Grid DataContext="{StaticResource productViewSource3}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -27,7 +27,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid DataContext="{Binding Source={StaticResource categoriesViewSource}}">
+                    <Grid Grid.Column="0" DataContext="{Binding Source={StaticResource categoriesViewSource}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="auto"/>
@@ -55,7 +55,16 @@
                         <TextBox Height="22" x:Name="ReorderLevelEdit" Margin="0,253,0,0" Grid.Column="1" VerticalAlignment="Top"/>
 
                     </Grid>
-                    <DataGrid x:Name="productDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource productViewSource3}}" Grid.Column="1" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,-684,-450">
+                    <DataGrid x:Name="productDataGrid" 
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding Source={StaticResource productViewSource3}}" Grid.Column="1" 
+                              RowDetailsVisibilityMode="VisibleWhenSelected" 
+                              Padding="0,0,0,60"
+                              ScrollViewer.CanContentScroll="True" 
+                              VerticalScrollBarVisibility="Auto"
+                              VerticalAlignment="Stretch"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
                                 <EventSetter Event="MouseDoubleClick" Handler="Item_Edit"/>
@@ -76,8 +85,8 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label Content="Double click a product to edit it" HorizontalAlignment="Left" Height="32" Margin="294,10,0,0" VerticalAlignment="Top" Width="196"/>
-                    <Button Content="GO" Click="Run_Product_Query" HorizontalAlignment="Center" Height="47" Margin="0,549,0,0" VerticalAlignment="Top" Width="480"/>
-
+                    <Button Content="GO" Click="Run_Product_Query" HorizontalAlignment="Center" Height="47" Margin="0,530,0,0" VerticalAlignment="Top" Width="480"/>
+                    <Button Content="DELETE ITEM" Click="Delete_Product_Query" HorizontalAlignment="Center" Height="47" Margin="0,478,0,0" VerticalAlignment="Top" Width="480"/>
 
 
 

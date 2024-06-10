@@ -76,14 +76,50 @@ namespace NorthwindApp
             };
             if(context.Products.Any(x => x.ProductID == product.ProductID))
             {
-                context.Products.SqlQuery("DELETE FROM Products WHERE ProductID=" +product.ProductID);
-                context.Products.Add(product);
+                var toUpdate = context.Products.Find(product.ProductID);
+                toUpdate.ProductName = product.ProductName;
+                toUpdate.QuantityPerUnit = product.QuantityPerUnit;
+                toUpdate.Category = product.Category;
+                toUpdate.UnitsInStock = product.UnitsInStock;
+                toUpdate.UnitPrice = product.UnitPrice;
+                toUpdate.Discontinued = product.Discontinued;
+                toUpdate.Supplier = product.Supplier;
+                toUpdate.ReorderLevel = product.ReorderLevel;
+                context.SaveChanges();
+                productViewSource3.View.Refresh();
             }
             else
             {
                 context.Products.Add(product);
+                context.SaveChanges();
+                productViewSource3.View.Refresh();
             }
         }
 
+        private void Delete_Product_Query(object sender, RoutedEventArgs e)
+        {
+            Product product = new Product()
+            {
+                ProductID = int.Parse(IDEdit.Text),
+                ProductName = NameEdit.Text,
+                QuantityPerUnit = QtyUnitEdit.Text,
+                Category = CategoriesComboEdit.SelectedItem as Category,
+                UnitsInStock = short.Parse(StockEdit.Text),
+                UnitPrice = decimal.Parse(PriceEdit.Text),
+                Discontinued = (bool)DiscontinuedEdit.IsChecked,
+                Supplier = SupplierComboEdit.SelectedItem as Supplier,
+                ReorderLevel = short.Parse(ReorderLevelEdit.Text)
+            };
+            if (context.Products.Any(x => x.ProductID == product.ProductID))
+            {
+                var toRemove = context.Products.Find(product.ProductID);
+                if (toRemove != null) 
+                { 
+                    context.Products.Remove(toRemove);
+                    context.SaveChanges();
+                    productViewSource3.View.Refresh();
+                }
+            }
+        }
     }
 }

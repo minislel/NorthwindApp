@@ -19,3 +19,7 @@ C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\Northwind
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\Northwin.21DCEB70.Up2Date
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.exe
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.pdb
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\NorthwindApp.exe.manifest
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\NorthwindApp.application
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.exe.manifest
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.application
