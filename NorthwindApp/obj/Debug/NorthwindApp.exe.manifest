@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NorthwindApp.exe" size="104960">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="NorthwindApp.exe" size="112128">
       <assemblyIdentity name="NorthwindApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5U6GwKHodswQBgY819e3Hn0mIGVYneLCfl51+PIQmDM=</dsig:DigestValue>
+        <dsig:DigestValue>oNhSCikcvQb8+mmzZNImbIcJpQX59zg7L/Ta/o1Pp18=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

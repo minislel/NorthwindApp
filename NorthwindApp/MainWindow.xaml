@@ -15,6 +15,7 @@
         <CollectionViewSource x:Key="orderViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Order}}"/>
         <CollectionViewSource x:Key="employeeViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Employee}}"/>
         <CollectionViewSource x:Key="shipperViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Shipper}}"/>
+        <ResourceDictionary x:Key="cart"/>
     </Window.Resources>
     <TabControl Margin="0,0,0,-16">
         <TabItem>
@@ -179,15 +180,17 @@
             <Border Background="#FFECECEC" >
                 <Grid DataContext="{Binding Source={StaticResource orderViewSource}}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="103.667"/>
+                        <ColumnDefinition Width="496.333"/>
+
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Employee ID"/>
-                    <TextBox x:Name="New"/>
+                    <Label Content="Employee ID" Grid.ColumnSpan="3"/>
+
                     <DataGrid x:Name="OrderDataGrid"
                               AutoGenerateColumns="False" 
                               EnableRowVirtualization="True" 
-                              ItemsSource="{Binding Source={StaticResource orderViewSource}}" Grid.Column="1" 
+                              ItemsSource="{Binding Source={StaticResource orderViewSource}}" Grid.Column="2" 
                               RowDetailsVisibilityMode="VisibleWhenSelected" 
                               Padding="0,0,0,60"
                               ScrollViewer.CanContentScroll="True" 
@@ -213,18 +216,53 @@
                             <DataGridTextColumn x:Name="OrderShipper" Binding="{Binding Order.Shipper.CompanyName}" Header="Shipper" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Employee" HorizontalAlignment="Left" Height="27" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <Label Content="Product" HorizontalAlignment="Left" Height="27" Margin="10,54,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <Label Content="Quantity" HorizontalAlignment="Left" Height="27" Margin="10,81,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <Label Content="Discount" HorizontalAlignment="Left" Height="27" Margin="10,108,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <Label Content="Customer" HorizontalAlignment="Left" Height="27" Margin="10,135,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <Label Content="Shipper" HorizontalAlignment="Left" Height="27" Margin="10,162,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
-                    <ComboBox x:Name="NewOrderEmp" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource employeeViewSource}}" DisplayMemberPath="IDandName" Margin="114,30,0,0" VerticalAlignment="Top" Width="166"/>
-                    <ComboBox x:Name="NewOrderProduct" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource productViewSource3}}" DisplayMemberPath="IDandName" Margin="114,57,0,0" VerticalAlignment="Top" Width="166"/>
-                    <ComboBox x:Name="NewOrderCustomer" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerViewSource}}" DisplayMemberPath="IDandName" Margin="114,138,0,0" VerticalAlignment="Top" Width="166"/>
-                    <ComboBox x:Name="NewOrderShipper" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource shipperViewSource}}" DisplayMemberPath="IDandName" Margin="114,165,0,0" VerticalAlignment="Top" Width="166"/>
-                    <TextBox HorizontalAlignment="Left" Margin="114,84,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_int" VerticalAlignment="Top" Width="166" Height="22"/>
-                    <TextBox HorizontalAlignment="Left" Margin="114,111,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_Double" VerticalAlignment="Top" Width="166" Height="22"/>
+                    <Label Content="Employee" HorizontalAlignment="Left" Height="27" Margin="10,23,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Product" HorizontalAlignment="Left" Height="27" Margin="10,151,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Quantity" HorizontalAlignment="Left" Height="27" Margin="10,178,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Discount" HorizontalAlignment="Left" Height="27" Margin="10,50,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Customer" HorizontalAlignment="Left" Height="27" Margin="10,77,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Shipper" HorizontalAlignment="Left" Height="27" Margin="10,104,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <ComboBox x:Name="NewOrderEmp" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource employeeViewSource}}" DisplayMemberPath="IDandName" Margin="10,26,0,0" VerticalAlignment="Top" Width="166" Grid.Column="1"/>
+                    <ComboBox x:Name="NewOrderProduct" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource productViewSource3}}" DisplayMemberPath="IDandName" Margin="10,154,0,0" VerticalAlignment="Top" Width="166" Grid.Column="1"/>
+                    <ComboBox x:Name="NewOrderCustomer" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerViewSource}}" DisplayMemberPath="IDandName" Margin="10,80,0,0" VerticalAlignment="Top" Width="166" Grid.Column="1" SelectionChanged="CustomerAddressFill"/>
+                    <ComboBox x:Name="NewOrderShipper" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource shipperViewSource}}" DisplayMemberPath="IDandName" Margin="10,107,0,0" VerticalAlignment="Top" Width="166" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderQty" HorizontalAlignment="Left" Margin="10,181,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_int" VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderDiscount" HorizontalAlignment="Left" Margin="10,53,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_Double" VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+
+                    <Label Content="Cart" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Remove from cart" HorizontalAlignment="Left" Margin="10,431,0,0" VerticalAlignment="Top" Width="270" Height="26" Click="RemoveFromCart" Grid.ColumnSpan="2"/>
+                    <Button Content="Clear cart" HorizontalAlignment="Left" Height="26" Margin="10,462,0,0" VerticalAlignment="Top" Width="270" Click="ClearCart" Grid.ColumnSpan="2"/>
+                    <Button Content="Add to cart" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" Width="270" Click="AddToCart" Grid.ColumnSpan="2"/>
+                    <ListView x:Name="cartListView" ItemsSource="{Binding}" Margin="10,260,320,196" Grid.ColumnSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Product ID"
+                                                DisplayMemberBinding="{Binding Key.ProductID}"/>
+                                <GridViewColumn Header="Product Name"
+                                                DisplayMemberBinding="{Binding Key.ProductName}"/>
+                                <GridViewColumn Header="Quantity" 
+                                                DisplayMemberBinding="{Binding Value}" 
+                                                Width="auto"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Button" HorizontalAlignment="Left" Height="54" Margin="10,558,0,0" VerticalAlignment="Top" Width="480" Click="PlaceOrder" Grid.ColumnSpan="2"/>
+                    <Label Content="Address" HorizontalAlignment="Left" Height="26" Margin="201,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="City" HorizontalAlignment="Left" Height="27" Margin="201,51,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="Name" HorizontalAlignment="Left" Height="27" Margin="201,77,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="Country" HorizontalAlignment="Left" Height="27" Margin="201,104,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="Postal Code" HorizontalAlignment="Left" Height="28" Margin="201,131,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="Region" HorizontalAlignment="Left" Height="27" Margin="200,159,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <Label Content="Required by" HorizontalAlignment="Left" Height="27" Margin="201,187,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderAddress" HorizontalAlignment="Left" Margin="277,26,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderCity" HorizontalAlignment="Left" Margin="277,53,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderName" HorizontalAlignment="Left" Margin="277,80,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderCountry" HorizontalAlignment="Left" Margin="277,107,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderPostal" HorizontalAlignment="Left" Margin="277,134,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderRegion" HorizontalAlignment="Left" Margin="277,161,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
+                    <DatePicker x:Name="NewOrderRequired" HorizontalAlignment="Left" Margin="277,188,0,0" VerticalAlignment="Top" Width="166" Grid.Column="1"/>
+                    <Label Content="Freight cost" HorizontalAlignment="Left" Height="28" Margin="201,214,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
+                    <TextBox x:Name="NewOrderFreight" HorizontalAlignment="Left" Margin="277,217,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_Double" VerticalAlignment="Top" Width="166" Height="22" Grid.Column="1"/>
                 </Grid>
             </Border>
         </TabItem>

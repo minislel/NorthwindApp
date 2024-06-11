@@ -3,32 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\shipper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\shipper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\shipper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\shipper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\northwindapp\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|c:\\users\\skutecznieuse\\desktop\\studia\\northwind\\northwindapp\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0685563D-4742-4503-957B-661789005E08}|NorthwindApp\\NorthwindApp.csproj|solutionrelative:northwindapp\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,11 +42,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 306,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Shipper.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Shipper.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\Shipper.cs",
@@ -55,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Customer.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Customer.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\Customer.cs",
@@ -68,33 +72,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Product.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\Product.cs",
               "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Product.cs",
               "RelativeToolTip": "NorthwindApp\\Product.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAgwCgAAAAzAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAA1wCgAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T19:28:30.73Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Employee.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Employee.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\Employee.cs",
               "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Employee.cs",
               "RelativeToolTip": "NorthwindApp\\Employee.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAkwC8AAABJAAAA",
+              "ViewState": "AQIAAB0AAAAAAAAAAAA3wC8AAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T19:23:34.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
               "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml",
@@ -106,28 +110,62 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Order.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\Order.cs",
               "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\Order.cs",
               "RelativeToolTip": "NorthwindApp\\Order.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAA6wCoAAAAAAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAxwA4AAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T14:11:56.4Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml.cs",
               "RelativeToolTip": "NorthwindApp\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAABAAAAAAAAAAAqwAUBAAAUAAAA",
+              "ViewState": "AQIAAKIBAAAAAAAAAAAowL8BAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-11T14:04:15.027Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "1ae65118-0eb6-4945-a288-d3f0bb3735ec",
+        "Display": 0,
+        "X": 480,
+        "Y": -30,
+        "Width": 800,
+        "Height": 600,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "NorthwindApp\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\SkutecznieUse\\Desktop\\studia\\Northwind\\NorthwindApp\\MainWindow.xaml",
+              "RelativeToolTip": "NorthwindApp\\MainWindow.xaml",
+              "ViewState": "AQIAAOoAAAAAAAAAAAD4vwYBAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-11T20:20:57.593Z",
               "EditorCaption": ""
             }
           ]

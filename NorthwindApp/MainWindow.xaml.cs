@@ -33,6 +33,7 @@ namespace NorthwindApp
         CollectionViewSource orderViewSource;
         CollectionViewSource employeeViewSource;
         CollectionViewSource shipperViewSource;
+        public ObservableCollection<KeyValuePair<Product, short>> cartItems = new ObservableCollection<KeyValuePair<Product, short>>();
         public MainWindow()
         {
             InitializeComponent();
@@ -43,7 +44,8 @@ namespace NorthwindApp
             orderViewSource = (CollectionViewSource)(FindResource("orderViewSource"));
             employeeViewSource = (CollectionViewSource)(FindResource("employeeViewSource"));
             shipperViewSource = (CollectionViewSource)(FindResource("shipperViewSource"));
-
+           
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,7 +56,9 @@ namespace NorthwindApp
             context.Customers.Load();
             context.Employees.Load();
             context.Shippers.Load();
+            context.Orders.Load(); 
             context.Order_Details.Load();
+            
             productViewSource3.Source = context.Products.Local;
             categoriesViewSource.Source = context.Categories.Local;
             supplierViewSource.Source= context.Suppliers.Local;
@@ -62,6 +66,7 @@ namespace NorthwindApp
             orderViewSource.Source = context.Order_Details.Local;
             employeeViewSource.Source = context.Employees.Local;
             shipperViewSource.Source = context.Shippers.Local;
+            
             this.SizeToContent = SizeToContent.Width;
             
         }
@@ -331,5 +336,144 @@ namespace NorthwindApp
         }
         #endregion
 
+        private void AddToCart(object sender, RoutedEventArgs e)
+        {
+            cartListView.DataContext = cartItems;
+            if (NewOrderProduct.SelectedValue != null && NewOrderQty.Text.Length != 0)
+            {
+                var product = NewOrderProduct.SelectedItem as Product;
+                short qty = short.Parse(NewOrderQty.Text);
+                if(cartItems.Any(x => x.Key == product))
+                {
+                    short temp = cartItems.Where(x => x.Key == product).Select(x => x.Value).SingleOrDefault();
+                    temp += qty;
+                    var toRemove = cartItems.Where(x => x.Key == product).SingleOrDefault();
+                    cartItems.Remove(toRemove);
+                    cartItems.Add(new KeyValuePair<Product, short>(product, temp));
+                }
+                else 
+                { 
+                    cartItems.Add(new KeyValuePair<Product, short>(product, qty));
+                }
+            }
+        }
+        private void ClearCart(object sender, RoutedEventArgs e)
+        { 
+            cartItems.Clear();
+        }
+        private void RemoveFromCart(object sender, RoutedEventArgs e) 
+        {
+            if( cartListView.SelectedItem is KeyValuePair<Product, short> kvp && cartListView.SelectedItem != null)
+            {
+                cartItems.Remove(kvp);
+            }
+
+        }
+
+        private void PlaceOrder(object sender, RoutedEventArgs e)
+        {
+            if (cartItems.Count == 0)
+            {
+                MessageBox.Show("Cart cannot be empty");
+                return;
+            }
+            if (NewOrderCustomer.SelectedItem == null || NewOrderEmp.SelectedItem == null || NewOrderShipper.SelectedItem == null) 
+            {
+                MessageBox.Show("Fill in all the values first");
+                return;
+            }
+            try
+            {
+                Customer customer = NewOrderCustomer.SelectedItem as Customer;
+                Employee employee = NewOrderEmp.SelectedItem as Employee; 
+                Shipper shipper = NewOrderShipper.SelectedItem as Shipper;
+                decimal freight = 0;
+                decimal.TryParse(NewOrderFreight.Text, out freight);
+                float discount = 0;
+                float.TryParse(NewOrderDiscount.Text, out discount);
+
+                /*                Order order = new Order()
+                                {
+                                    Customer = customer,
+                                    CustomerID = customer.CustomerID,
+                                    Employee = employee,
+                                    EmployeeID = employee.EmployeeID,
+                                    Freight = decimal.Parse(NewOrderFreight.Text),
+                                    OrderDate = DateTime.Now,
+                                    RequiredDate = NewOrderRequired.SelectedDate,
+                                    ShipAddress = NewOrderAddress.Text,
+                                    ShipCity = NewOrderCity.Text,
+                                    ShipRegion = NewOrderRegion.Text,
+                                    ShipCountry = NewOrderCountry.Text,
+                                    ShipName = NewOrderName.Text,
+                                    ShipPostalCode = NewOrderPostal.Text,
+                                    ShipVia = shipper.ShipperID
+                                };*/
+                Order order = new Order();
+
+                order.Customer = customer;
+                order.CustomerID = customer.CustomerID;
+                order.Employee = employee;
+                order.EmployeeID = employee.EmployeeID;
+                order.Freight = freight;
+                order.OrderDate = DateTime.Now;
+                order.RequiredDate = NewOrderRequired.SelectedDate;
+                order.ShipAddress = NewOrderAddress.Text;
+                order.ShipCity = NewOrderCity.Text;
+                order.ShipRegion = NewOrderRegion.Text;
+                order.ShipCountry = NewOrderCountry.Text;
+                order.ShipName = NewOrderName.Text;
+                order.ShipPostalCode = NewOrderPostal.Text;
+                order.ShipVia = shipper.ShipperID;
+                
+                List<Order_Detail> details = new List<Order_Detail>();
+                foreach (var item in cartItems) 
+                {
+                    var detail = new Order_Detail();
+                    detail.Discount = discount;
+                    detail.Order = order;
+                        detail.OrderID = order.OrderID;
+                        detail.Product = item.Key;
+                        detail.ProductID = item.Key.ProductID;
+                        detail.Quantity = item.Value;
+                        detail.UnitPrice = (decimal)item.Key.UnitPrice;
+                    details.Add(detail);
+                }
+                foreach (var det in details)
+                {
+                    order.Order_Details.Add(det);
+                    context.Order_Details.Add(det);
+                    context.SaveChanges();
+                }
+                //fix id issue
+                context.Orders.Add(order);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); 
+                return;
+
+            }
+
+        }
+
+        private void CustomerAddressFill(object sender, SelectionChangedEventArgs e)
+        {
+            if(sender is  ComboBox box)
+            {
+                var customer = box.SelectedItem as Customer;
+                if (customer != null)
+                {
+                    NewOrderAddress.Text = customer.Address;
+                    NewOrderCity.Text = customer.City;
+                    NewOrderName.Text = customer.ContactName;
+                    NewOrderCountry.Text = customer.Country;
+                    NewOrderPostal.Text = customer.PostalCode;
+                    NewOrderRegion.Text = customer.Region;
+                }
+
+            }
+        }
     }
 }
