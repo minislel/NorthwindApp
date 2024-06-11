@@ -7,14 +7,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="NorthwindApp.exe.manifest" size="5652">
+    <dependentAssembly dependencyType="install" codebase="NorthwindApp.exe.manifest" size="5653">
       <assemblyIdentity name="NorthwindApp.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MmJyqlhLWWUHBiqgcf/G/ip1cY2qoFc3AhGcufhzWiM=</dsig:DigestValue>
+        <dsig:DigestValue>ZYOb13/TkBqR5qniaqwN4kSgVbCsqmQ+c3wUYmEwblg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

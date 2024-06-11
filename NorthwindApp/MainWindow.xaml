@@ -8,11 +8,13 @@
         Title="MainWindow" Height="650" Width="1390" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Customer}}"/>
-        <CollectionViewSource x:Key="customerViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Customer}}"/>
         <CollectionViewSource x:Key="productViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
         <CollectionViewSource x:Key="productViewSource3" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
-        <CollectionViewSource x:Key="categoriesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
-        <CollectionViewSource x:Key="supplierViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Product}}"/>
+        <CollectionViewSource x:Key="categoriesViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Category}}"/>
+        <CollectionViewSource x:Key="supplierViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Supplier}}"/>
+        <CollectionViewSource x:Key="orderViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Order}}"/>
+        <CollectionViewSource x:Key="employeeViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Employee}}"/>
+        <CollectionViewSource x:Key="shipperViewSource"  d:DesignSource="{d:DesignInstance {x:Type local:Shipper}}"/>
     </Window.Resources>
     <TabControl Margin="0,0,0,-16">
         <TabItem>
@@ -23,17 +25,19 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="98.972"/>
+                        <ColumnDefinition Width="61.437"/>
+                        <ColumnDefinition Width="339.591"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" DataContext="{Binding Source={StaticResource categoriesViewSource}}">
+                    <Grid Grid.Column="0" DataContext="{Binding Source={StaticResource categoriesViewSource}}" Grid.ColumnSpan="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label x:Name="IDEditLabel" Content="ID" HorizontalAlignment="Left" Height="28" Margin="10,25,0,0" VerticalAlignment="Top" Width="55" Grid.Column="0"/>
-                        <TextBox Height="22" x:Name="IDEdit" Margin="0,28,0,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <Label x:Name="IDEditLabel" Content="ID" HorizontalAlignment="Left" Height="28" Margin="10,25,0,0" VerticalAlignment="Top" Width="55"  Grid.Column="0"/>
+                        <TextBox Height="22" x:Name="IDEdit" Margin="0,28,0,0" PreviewTextInput="NumberValidationTextBox_int" Grid.Column="1" VerticalAlignment="Top"/>
 
                         <Label x:Name="NameEditLabel" Content="Product name" Height="26" Margin="0,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
                         <TextBox Height="22" x:Name="NameEdit" Margin="0,60,0,0" Grid.Column="1" VerticalAlignment="Top"/>
@@ -44,26 +48,24 @@
                         </ComboBox>
                         <Label x:Name="QtyUnitEditLabel" Content="Quantity/Unit" Height="26" Margin="0,87,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
                         <Label x:Name="StockEditLabel" Content="Quantity" Height="26" Margin="0,146,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
-                        <TextBox Height="22" x:Name="StockEdit" Margin="0,148,0,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <TextBox Height="22" x:Name="StockEdit" PreviewTextInput="NumberValidationTextBox_int" Margin="0,148,0,0" Grid.Column="1" VerticalAlignment="Top"/>
                         <Label x:Name="PriceEditLabel" Content="Price" Height="26" Margin="0,168,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
-                        <TextBox Height="22" x:Name="PriceEdit" Margin="0,175,0,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <TextBox Height="22" x:Name="PriceEdit" PreviewTextInput="NumberValidationTextBox_Double" Margin="0,175,0,0" Grid.Column="1" VerticalAlignment="Top"/>
                         <Label x:Name="DiscontinuedEditLabel" Content="Discontinued" Height="26" Margin="0,194,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
                         <CheckBox x:Name="DiscontinuedEdit" Grid.Column="1" Margin="0,202,144,31"/>
                         <Label x:Name="SupplierEditLabel" Content="Supplier" Height="26" Margin="0,219,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
                         <ComboBox x:Name="SupplierComboEdit" ItemsSource="{Binding Source={StaticResource supplierViewSource}}"  DisplayMemberPath="CompanyName" HorizontalAlignment="Center" Height="24" Margin="0,220,0,0" VerticalAlignment="Top" Width="160" Grid.Column="1"/>
                         <Label Content="Reorder level" HorizontalAlignment="Left" Height="28" Margin="0,250,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.341,0.049"/>
-                        <TextBox Height="22" x:Name="ReorderLevelEdit" Margin="0,253,0,0" Grid.Column="1" VerticalAlignment="Top"/>
-
+                        <TextBox Height="22" x:Name="ReorderLevelEdit" PreviewTextInput="NumberValidationTextBox_int" Margin="0,253,0,0" Grid.Column="1" VerticalAlignment="Top"/>
                     </Grid>
                     <DataGrid x:Name="productDataGrid" 
                               AutoGenerateColumns="False" 
                               EnableRowVirtualization="True" 
-                              ItemsSource="{Binding Source={StaticResource productViewSource3}}" Grid.Column="1" 
+                              ItemsSource="{Binding Source={StaticResource productViewSource3}}" Grid.Column="3" 
                               RowDetailsVisibilityMode="VisibleWhenSelected" 
                               Padding="0,0,0,60"
                               ScrollViewer.CanContentScroll="True" 
                               VerticalScrollBarVisibility="Auto"
-                              VerticalAlignment="Stretch"
                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
@@ -81,30 +83,149 @@
                             <DataGridTextColumn x:Name="supplierColumn" Binding="{Binding Supplier.CompanyName}" Header="Supplier" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                             <DataGridTextColumn x:Name="unitsOnOrderColumn" Binding="{Binding UnitsOnOrder}" Header="Units On Order" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
                             <DataGridTextColumn x:Name="ReorderLevelColumn" Binding="{Binding ReorderLevel}" Header="Reorder Level" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
-
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Double click a product to edit it" HorizontalAlignment="Left" Height="32" Margin="294,10,0,0" VerticalAlignment="Top" Width="196"/>
-                    <Button Content="GO" Click="Run_Product_Query" HorizontalAlignment="Center" Height="47" Margin="0,530,0,0" VerticalAlignment="Top" Width="480"/>
-                    <Button Content="DELETE ITEM" Click="Delete_Product_Query" HorizontalAlignment="Center" Height="47" Margin="0,478,0,0" VerticalAlignment="Top" Width="480"/>
-
-
-
-
-
+                    <Label Content="Double click a product to edit it" HorizontalAlignment="Left" Height="32" Margin="134,10,0,0" VerticalAlignment="Top" Width="196" Grid.Column="2"/>
+                    <Button Content="GO" Click="Run_Product_Query" HorizontalAlignment="Left" Height="47" Margin="10,530,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="3"/>
+                    <Button Content="DELETE ITEM" Click="Delete_Product_Query" HorizontalAlignment="Left" Height="47" Margin="10,478,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="3"/>
                 </Grid>
             </Border>
         </TabItem>
         <TabItem>
             <TabItem.Header>Customers</TabItem.Header>
-            <Border Background="#FFECECEC" >
+            <Border Background="#FFECECEC" Margin="10,0,7,0" Height="604">
+                <Grid DataContext="{StaticResource customerViewSource}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="98.972"/>
+                        <ColumnDefinition Width="401.028"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
 
+                    <Grid Grid.Column="0" DataContext="{Binding Source={StaticResource categoriesViewSource}}" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="321*"/>
+                            <RowDefinition Height="256*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="CustIDEditLabel" Content="ID"  HorizontalAlignment="Left" Height="28" Margin="0,25,0,0" VerticalAlignment="Top" Width="55" Grid.Column="0"/>
+                        <TextBox Height="22" x:Name="CustIDEdit" Margin="25,28,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+
+                        <Label x:Name="CustNameEditLabel" Content="Company name" Height="26" Margin="0,58,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100"/>
+                        <TextBox Height="22" x:Name="CustNameEdit" Margin="25,60,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <Label x:Name="CustContactEditLabel" Content="Contact Name" HorizontalAlignment="Left" Height="28" Margin="0,118,0,0" VerticalAlignment="Top" Width="90" Grid.Column="0"/>
+                        <TextBox Height="22" x:Name="CustContactEdit" Margin="25,89,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <TextBox Height="22" x:Name="CustContactTitleEdit" Margin="25,118,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+
+                        <Label x:Name="CustContactTitleEditLabel" Content="Contact Title" Height="26" Margin="0,87,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
+                        <Label x:Name="CustAddressEditLabel" Content="Address" Height="26" Margin="0,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
+                        <Label x:Name="CustCityEditLabel" Content="City" Height="26" Margin="0,173,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
+                        <TextBox Height="22" x:Name="CustCityEdit" Margin="25,175,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <Label x:Name="CustRegionEditLabel" Content="Region" Height="26" Margin="0,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
+                        <TextBox x:Name="CustRegionEdit" Height="22" Grid.Column="1" Margin="25,202,-309,0" VerticalAlignment="Top"/>
+                        <Label x:Name="CustPostalEditLabel" Content="Postal Code" Height="26" Margin="0,229,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90" Grid.Column="0"/>
+                        <TextBox x:Name="CustPostalEdit" Height="22" Grid.Column="1" Margin="25,229,-309,0" VerticalAlignment="Top"/>
+                        <Label Content="Country" HorizontalAlignment="Left" Height="28" Margin="0,253,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.341,0.049"/>
+                        <TextBox Height="22" x:Name="CustCountryEdit" Margin="25,256,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <TextBox Height="22" x:Name="CustAddressEdit" Margin="25,146,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <Label Content="Phone" HorizontalAlignment="Left" Height="28" Margin="0,280,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.341,0.049"/>
+                        <TextBox Height="22" x:Name="CustPhoneEdit" Margin="25,283,-309,0" Grid.Column="1" VerticalAlignment="Top"/>
+                        <Label Content="Fax" HorizontalAlignment="Left" Height="28" Margin="0,303,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.341,0.049" Grid.RowSpan="2"/>
+                        <TextBox Height="22" x:Name="CustFaxEdit" Margin="25,310,-309,0" Grid.Column="1" VerticalAlignment="Top" Grid.RowSpan="2"/>
+
+                    </Grid>
+                    <DataGrid x:Name="CustproductDataGrid" 
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding Source={StaticResource customerViewSource}}" Grid.Column="2" 
+                              RowDetailsVisibilityMode="VisibleWhenSelected" 
+                              Padding="0,0,0,60"
+                              ScrollViewer.CanContentScroll="True" 
+                              VerticalScrollBarVisibility="Auto"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="Customer_Edit"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="CustIDColumn" Binding="{Binding CustomerID}" Header="ID" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustNameColumn" Binding="{Binding CompanyName}" Header="Company Name" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustContactColumn" Binding="{Binding ContactName}" Header="Contact Name" Width="SizeToCells" CanUserReorder="False" IsReadOnly="True"/>
+                            <DataGridTextColumn x:Name="CustContactTitleColumn" Binding="{Binding ContactTitle}" Header="Contact Title" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustAddressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustCityColumn" Binding="{Binding City}" Header="City" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustRegionColumn" Binding="{Binding Region}" Header="Region" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustPostalCodeColumn" Binding="{Binding PostalCode}" Header="Postal Code" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustCountryColumn" Binding="{Binding Country}" Header="Country" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustPhoneColumn" Binding="{Binding Phone}" Header="Phone" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="CustFaxColumn" Binding="{Binding Fax}" Header="Fax" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Content="Double click a product to edit it" HorizontalAlignment="Left" Height="32" Margin="195,0,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1"/>
+                    <Button Content="GO" Click="Run_Customer_Query" HorizontalAlignment="Center" Height="47" Margin="0,530,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"/>
+                    <Button Content="DELETE CUSTOMER" Click="Delete_Customer_Query" HorizontalAlignment="Center" Height="47" Margin="0,478,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"/>
+                </Grid>
             </Border>
+
         </TabItem>
         <TabItem>
             <TabItem.Header>Orders</TabItem.Header>
             <Border Background="#FFECECEC" >
-
+                <Grid DataContext="{Binding Source={StaticResource orderViewSource}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Employee ID"/>
+                    <TextBox x:Name="New"/>
+                    <DataGrid x:Name="OrderDataGrid"
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding Source={StaticResource orderViewSource}}" Grid.Column="1" 
+                              RowDetailsVisibilityMode="VisibleWhenSelected" 
+                              Padding="0,0,0,60"
+                              ScrollViewer.CanContentScroll="True" 
+                              VerticalScrollBarVisibility="Auto"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="Order_New"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="OrderOrderID" Binding="{Binding OrderID}" Header="ID" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderEmpID" Binding="{Binding Order.EmployeeID}" Header="Employee ID" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderProdID" Binding="{Binding Product.ProductID}" Header="Product ID" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderProdName" Binding="{Binding Product.ProductName}" Header="Product Name" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderProdQty" Binding="{Binding Quantity}" Header="Qty" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderProdPrice" Binding="{Binding UnitPrice}" Header="Unit Price" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderDiscount" Binding="{Binding Discount}" Header="Discount" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderTotal" Binding="{Binding Total}" Header="Total" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderCustID" Binding="{Binding Order.CustomerID}" Header="Customer ID" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderDate" Binding="{Binding Order.OrderDate}" Header="Date ordered" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderShipDate" Binding="{Binding Order.ShippedDate}" Header="Date shipped" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="OrderShipper" Binding="{Binding Order.Shipper.CompanyName}" Header="Shipper" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Content="Employee" HorizontalAlignment="Left" Height="27" Margin="10,27,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Product" HorizontalAlignment="Left" Height="27" Margin="10,54,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Quantity" HorizontalAlignment="Left" Height="27" Margin="10,81,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Discount" HorizontalAlignment="Left" Height="27" Margin="10,108,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Customer" HorizontalAlignment="Left" Height="27" Margin="10,135,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <Label Content="Shipper" HorizontalAlignment="Left" Height="27" Margin="10,162,0,0" VerticalAlignment="Top" Width="75" Grid.Column="0"/>
+                    <ComboBox x:Name="NewOrderEmp" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource employeeViewSource}}" DisplayMemberPath="IDandName" Margin="114,30,0,0" VerticalAlignment="Top" Width="166"/>
+                    <ComboBox x:Name="NewOrderProduct" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource productViewSource3}}" DisplayMemberPath="IDandName" Margin="114,57,0,0" VerticalAlignment="Top" Width="166"/>
+                    <ComboBox x:Name="NewOrderCustomer" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerViewSource}}" DisplayMemberPath="IDandName" Margin="114,138,0,0" VerticalAlignment="Top" Width="166"/>
+                    <ComboBox x:Name="NewOrderShipper" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource shipperViewSource}}" DisplayMemberPath="IDandName" Margin="114,165,0,0" VerticalAlignment="Top" Width="166"/>
+                    <TextBox HorizontalAlignment="Left" Margin="114,84,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_int" VerticalAlignment="Top" Width="166" Height="22"/>
+                    <TextBox HorizontalAlignment="Left" Margin="114,111,0,0" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox_Double" VerticalAlignment="Top" Width="166" Height="22"/>
+                </Grid>
             </Border>
         </TabItem>
         <TabItem>

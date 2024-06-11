@@ -40,6 +40,10 @@ namespace NorthwindApp
         public string Notes { get; set; }
         public Nullable<int> ReportsTo { get; set; }
         public string PhotoPath { get; set; }
+        public virtual string IDandName
+        {
+            get { return $"{EmployeeID}. {Title} {FirstName} {LastName}"; }
+        }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Employee> Employees1 { get; set; }

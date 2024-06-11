@@ -22,5 +22,6 @@ namespace NorthwindApp
     
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
+        public decimal Total { get { return Quantity * UnitPrice * ((decimal)(1-Discount)); } }
     }
 }
