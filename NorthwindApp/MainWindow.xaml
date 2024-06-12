@@ -240,7 +240,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Content="Button" HorizontalAlignment="Left" Height="54" Margin="10,558,0,0" VerticalAlignment="Top" Width="480" Click="PlaceOrder" Grid.ColumnSpan="2"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Height="54" Margin="10,514,0,0" VerticalAlignment="Top" Width="480" Click="PlaceOrder" Grid.ColumnSpan="2"/>
                     <Label Content="Address" HorizontalAlignment="Left" Height="26" Margin="201,24,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
                     <Label Content="City" HorizontalAlignment="Left" Height="27" Margin="201,51,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
                     <Label Content="Name" HorizontalAlignment="Left" Height="27" Margin="201,77,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1"/>
@@ -338,7 +338,13 @@
         <TabItem>
             <TabItem.Header>Suppliers</TabItem.Header>
             <Border Background="#FFECECEC" >
-
+                <Grid DataContext="{Binding Source={StaticResource shipperViewSource}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                </Grid>
             </Border>
         </TabItem>
     </TabControl>

@@ -10,5 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.context.tt")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("northwnd.ldf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("northwnd.mdf")]
 
 

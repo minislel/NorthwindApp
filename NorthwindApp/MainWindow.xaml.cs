@@ -638,5 +638,9 @@ namespace NorthwindApp
             }
         }
         #endregion
+        #region shipper queries
+
+
+        #endregion
     }
 }

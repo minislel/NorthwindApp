@@ -73,7 +73,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>BymfXlbN+qjo3ekzgTSQa9sY1QdzoENMk+yLKjkiGWQ=</dsig:DigestValue>
+        <dsig:DigestValue>j9vv8tHHwoDfvso/nxNo9yYmpaaT1/Mho7JYaSfQhEY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,6 +102,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>7sV8G8PlYL5yvkSnligMzia5fhX5icFMxMj2gBVSaZI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="northwnd.ldf" size="75497472" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>be3Aibp73tBP8rv5wcQL4sFVCHBtKUICoX+SeQVUnAg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="northwnd.mdf" size="75497472" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+lA9uCDFGOtAN+OI5AKn6a5pPM7g6ZgfjEpRG3kY8bY=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -23,3 +23,5 @@ C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\Northwind
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\NorthwindApp.application
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.exe.manifest
 C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\obj\Debug\NorthwindApp.application
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\northwnd.ldf
+C:\Users\SkutecznieUse\Desktop\studia\Northwind\NorthwindApp\bin\Debug\northwnd.mdf
