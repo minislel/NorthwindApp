@@ -168,7 +168,6 @@
                             <DataGridTextColumn x:Name="CustFaxColumn" Binding="{Binding Fax}" Header="Fax" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label Content="Double click a product to edit it" HorizontalAlignment="Left" Height="32" Margin="195,0,0,0" VerticalAlignment="Top" Width="196" Grid.Column="1"/>
                     <Button Content="GO" Click="Run_Customer_Query" HorizontalAlignment="Center" Height="47" Margin="0,530,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"/>
                     <Button Content="DELETE CUSTOMER" Click="Delete_Customer_Query" HorizontalAlignment="Center" Height="47" Margin="0,478,0,0" VerticalAlignment="Top" Width="480" Grid.ColumnSpan="2"/>
                 </Grid>
@@ -297,8 +296,6 @@
                             <DataGridTextColumn x:Name="EmpHireDate" Binding="{Binding HireDate}" Header="Hire Date" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                             <DataGridTextColumn x:Name="EmpBirthDate" Binding="{Binding BirthDate}" Header="Birth Date" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                             <DataGridTextColumn x:Name="EmpExt" Binding="{Binding Extension}" Header="Extension" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
-                            <DataGridTextColumn x:Name="Empphoto" Binding="{Binding Photo}" Header="Notes" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
-
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -338,12 +335,63 @@
         <TabItem>
             <TabItem.Header>Suppliers</TabItem.Header>
             <Border Background="#FFECECEC" >
-                <Grid DataContext="{Binding Source={StaticResource shipperViewSource}}">
+                <Grid DataContext="{Binding Source={StaticResource supplierViewSource}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="400"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    
+                    <DataGrid x:Name="ShipDataGrid"
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding Source={StaticResource supplierViewSource}}" Grid.Column="1" 
+                              RowDetailsVisibilityMode="VisibleWhenSelected" 
+                              Padding="0,0,0,60"
+                              ScrollViewer.CanContentScroll="True" 
+                              VerticalScrollBarVisibility="Auto"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="SuppEdit"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="SuppID" Binding="{Binding SupplierID}" Header="ID" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppName" Binding="{Binding CompanyName}" Header="Name" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppContact" Binding="{Binding Contact}" Header="Contact" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppAddress" Binding="{Binding Address}" Header="Address" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppCity" Binding="{Binding City}" Header="City" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppPostal" Binding="{Binding PostalCode}" Header="Postal Code" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppCountry" Binding="{Binding Country}" Header="Country" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppRegion" Binding="{Binding Region}" Header="Region" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppFax" Binding="{Binding Fax}" Header="Fax" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="SuppPhone" Binding="{Binding Phone}" Header="Phone" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label Content="ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Company Name" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Contact Name" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Contact Title" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Address" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+                    <Label Content="City" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Postal Code" HorizontalAlignment="Left" Margin="10,166,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Country" HorizontalAlignment="Left" Margin="10,192,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Region" HorizontalAlignment="Left" Margin="10,218,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Fax" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Phone" HorizontalAlignment="Left" Margin="9,270,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="SuppEditID"  HorizontalAlignment="Left" Margin="115,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="194" PreviewTextInput="NumberValidationTextBox_int"/>
+                    <TextBox x:Name="SuppEditName" HorizontalAlignment="Left" Margin="115,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditContName" HorizontalAlignment="Left" Margin="115,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditContTit" HorizontalAlignment="Left" Margin="115,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditAddress" HorizontalAlignment="Left" Margin="115,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditCity" HorizontalAlignment="Left" Margin="115,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditPostal" HorizontalAlignment="Left" Margin="115,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditCountry" HorizontalAlignment="Left" Margin="115,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditRegion" HorizontalAlignment="Left" Margin="115,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditFax" HorizontalAlignment="Left" Margin="115,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox x:Name="SuppEditPhone" HorizontalAlignment="Left" Margin="115,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <Button Content="DELETE" HorizontalAlignment="Center" Height="57" Margin="0,514,0,0" VerticalAlignment="Top" Width="382" Click="Delete_Supp_Query"/>
+                    <Button Content="GO" HorizontalAlignment="Center" Height="57" Margin="0,452,0,0" VerticalAlignment="Top" Width="382" Click="Run_Supp_Query"/>
+
                 </Grid>
             </Border>
         </TabItem>

@@ -638,9 +638,135 @@ namespace NorthwindApp
             }
         }
         #endregion
-        #region shipper queries
+        #region Supplier queries
+        private void SuppEdit(object sender, MouseButtonEventArgs e)
+        {
+            if(sender is DataGridRow row)
+            {
+                var supp = row.Item as Supplier;
+                SuppEditID.Text = supp.SupplierID.ToString();
+                SuppEditName.Text = supp.CompanyName;
+                SuppEditContName.Text = supp.ContactName;
+                SuppEditContTit.Text = supp.ContactTitle;
+                SuppEditAddress.Text = supp.Address;
+                SuppEditCity.Text = supp.City;
+                SuppEditPostal.Text = supp.PostalCode;
+                SuppEditCountry.Text = supp.Country;
+                SuppEditRegion.Text = supp.Region;
+                SuppEditFax.Text = supp.Fax;
+                SuppEditPhone.Text = supp.Phone;
+            }
+
+        }
+        private void Run_Supp_Query(object sender, RoutedEventArgs e) 
+        {
+            Supplier supplier = new Supplier()
+            {
+                SupplierID = int.Parse(SuppEditID.Text),
+                CompanyName = SuppEditName.Text,
+                ContactName = SuppEditContName.Text,
+                ContactTitle = SuppEditContTit.Text,
+                Address = SuppEditAddress.Text,
+                City = SuppEditCity.Text,
+                Region = SuppEditRegion.Text,
+                PostalCode = SuppEditPostal.Text,
+                Country = SuppEditCountry.Text,
+                Fax = SuppEditFax.Text,
+                Phone = SuppEditPhone.Text
+            };
+            if (context.Suppliers.Any(x => x.SupplierID == supplier.SupplierID))
+            {
+                var toUpdate = context.Suppliers.Find(supplier.SupplierID);
+                    toUpdate.CompanyName = supplier.CompanyName;
+                    toUpdate.ContactName = supplier.ContactName;
+                    toUpdate.ContactTitle = supplier.ContactTitle;
+                toUpdate.Address = supplier.Address;
+                toUpdate.City = supplier.City;
+                toUpdate.Region = supplier.Region;
+                toUpdate.PostalCode = supplier.PostalCode;
+                toUpdate.Country = supplier.Country;
+                toUpdate.Fax = supplier.Fax;
+                toUpdate.Phone = supplier.Phone;
 
 
+                context.SaveChanges();
+
+            }
+            else
+            {
+                context.Suppliers.Add(supplier);
+                context.SaveChanges();
+
+            }
+           supplierViewSource.View.Refresh();
+            
+        }
+        private void Delete_Supp_Query(object sender, RoutedEventArgs e)
+        {
+            var Result = MessageBox.Show($"Are you sure? \nThis action will delete the supplier assigned to {EmpEditID.Text} and all products supplied by them, along with orders related to these products.", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (Result == MessageBoxResult.Yes)
+            {
+                try
+                {
+
+                    Supplier supplier = new Supplier()
+                    {
+                        SupplierID = int.Parse(SuppEditID.Text)
+                    };
+                    var toRemoveSupp = context.Suppliers.Find(supplier.SupplierID);
+
+                    if(context.Products.Any(x=>x.SupplierID == toRemoveSupp.SupplierID))
+                    {
+                        var toRemoveProducts = context.Products.Select(x => x).Where(x => x.SupplierID == toRemoveSupp.SupplierID).ToList();
+                        foreach(var product in toRemoveProducts)
+                        {
+                            if (context.Order_Details.Any(x => x.ProductID == product.ProductID))
+                            {
+                                List<Order> toRemoveOrders = new List<Order>();
+                                var toRemoveDetails = context.Order_Details.Select(x => x).Where(x => x.ProductID == product.ProductID).ToList();
+                                foreach (var item in toRemoveDetails)
+                                {
+                                    toRemoveOrders.Add(context.Orders.Select(x => x).Where(x => x.OrderID == item.OrderID).SingleOrDefault());
+                                }
+                                foreach (var item in toRemoveDetails)
+                                {
+                                    context.Order_Details.Remove(item);
+                                }
+                                context.SaveChanges();
+                                foreach (var item in toRemoveOrders)
+                                {
+
+                                    context.Orders.Remove(item);
+                                }
+                                context.SaveChanges();
+                                productViewSource3.View.Refresh();
+                            }
+                            if (context.Products.Any(x => x.ProductID == product.ProductID))
+                            {
+                                var toRemove = context.Products.Find(product.ProductID);
+                                if (toRemove != null)
+                                {
+                                    context.Products.Remove(toRemove);
+                                    context.SaveChanges();
+                                    productViewSource3.View.Refresh();
+                                }
+                            }
+                        }
+                    }
+                    context.Suppliers.Remove(toRemoveSupp);
+
+                    supplierViewSource.View.Refresh();
+                    productViewSource3.View.Refresh();
+                    orderViewSource.View.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid ID: " + ex.Message);
+                }
+            }
+        }
         #endregion
+
+
     }
 }

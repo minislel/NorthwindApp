@@ -35,5 +35,6 @@ namespace NorthwindApp
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Product> Products { get; set; }
+        public virtual string Contact { get { return $"{ContactTitle} {ContactName}"; } }
     }
 }
