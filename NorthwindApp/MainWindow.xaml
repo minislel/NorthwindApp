@@ -182,7 +182,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="103.667"/>
                         <ColumnDefinition Width="496.333"/>
-
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Employee ID" Grid.ColumnSpan="3"/>
@@ -196,11 +195,6 @@
                               ScrollViewer.CanContentScroll="True" 
                               VerticalScrollBarVisibility="Auto"
                               Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
-                        <DataGrid.ItemContainerStyle>
-                            <Style TargetType="DataGridRow">
-                                <EventSetter Event="MouseDoubleClick" Handler="Order_New"/>
-                            </Style>
-                        </DataGrid.ItemContainerStyle>
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="OrderOrderID" Binding="{Binding OrderID}" Header="ID" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
                             <DataGridTextColumn x:Name="OrderEmpID" Binding="{Binding Order.EmployeeID}" Header="Employee ID" Width="SizeToHeader" IsReadOnly="True" CanUserReorder="False"/>
@@ -269,7 +263,76 @@
         <TabItem>
             <TabItem.Header>Employees</TabItem.Header>
             <Border Background="#FFECECEC" >
+                <Grid DataContext="{Binding Source={StaticResource employeeViewSource}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="EmpDataGrid"
+                              AutoGenerateColumns="False" 
+                              EnableRowVirtualization="True" 
+                              ItemsSource="{Binding Source={StaticResource employeeViewSource}}" Grid.Column="1" 
+                              RowDetailsVisibilityMode="VisibleWhenSelected" 
+                              Padding="0,0,0,60"
+                              ScrollViewer.CanContentScroll="True" 
+                              VerticalScrollBarVisibility="Auto"
+                              Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=ActualHeight}">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="EmployeeEdit"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="EmpID" Binding="{Binding EmployeeID}" Header="ID" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpTOC" Binding="{Binding TitleOfCourtesy}" Header="TOC" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpTitle" Binding="{Binding Title}" Header="Title" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpFirstN" Binding="{Binding FirstName}" Header="Name" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpLastN" Binding="{Binding LastName}" Header="Surname" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpRegion" Binding="{Binding Region}" Header="Region" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpAddress" Binding="{Binding Address}" Header="Address" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpCity" Binding="{Binding City}" Header="City" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpCountry" Binding="{Binding Country}" Header="Country" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpPostal" Binding="{Binding PostalCode}" Header="Postal code" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpPhone" Binding="{Binding HomePhone}" Header="Phone" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpHireDate" Binding="{Binding HireDate}" Header="Hire Date" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpBirthDate" Binding="{Binding BirthDate}" Header="Birth Date" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="EmpExt" Binding="{Binding Extension}" Header="Extension" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
+                            <DataGridTextColumn x:Name="Empphoto" Binding="{Binding Photo}" Header="Notes" Width="SizeToCells" IsReadOnly="True" CanUserReorder="False"/>
 
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="Surname" Height="30" Width="80" HorizontalAlignment="Left" Canvas.Left="174" Canvas.Top="168" VerticalAlignment="Top" Margin="172,73,0,0"/>
+                    <Label Height="33" Width="52" Content="Title" HorizontalAlignment="Left" Canvas.Left="174" Canvas.Top="103" VerticalAlignment="Top" Margin="172,136,0,0"/>
+                    <Image x:Name="image" HorizontalAlignment="Left" Height="173" Margin="10,10,0,0" VerticalAlignment="Top" Width="147" Grid.Column="0" />
+                    <Label HorizontalAlignment="Center" Height="33" Margin="0,10,0,0" VerticalAlignment="Top" Width="52" Content="ID"/>
+                    <Label HorizontalAlignment="Center" Height="30" Margin="0,43,0,0" VerticalAlignment="Top" Width="52" Content="Name"/>
+                    <Label HorizontalAlignment="Center" Height="33" Margin="0,103,0,0" VerticalAlignment="Top" Width="52" Content="TOC"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,196,0,0" VerticalAlignment="Top" Width="56" Content="Address"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,229,0,0" VerticalAlignment="Top" Width="56" Content="Region"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,262,0,0" VerticalAlignment="Top" Width="56" Content="City"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,293,0,0" VerticalAlignment="Top" Width="56" Content="Country"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,326,0,0" VerticalAlignment="Top" Width="76" Content="Postal Code"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,359,0,0" VerticalAlignment="Top" Width="56" Content="Phone"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,392,0,0" VerticalAlignment="Top" Width="76" Content="Extension"/>
+                    <Label HorizontalAlignment="Left" Height="33" Margin="10,425,0,0" VerticalAlignment="Top" Width="116" Content="Upload new photo"/>
+                    <TextBox x:Name="EmpEditID" HorizontalAlignment="Left" Margin="242,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" Height="17" PreviewTextInput="NumberValidationTextBox_int"/>
+                    <TextBox x:Name="EmpEditName" HorizontalAlignment="Left" Margin="242,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" Height="16"/>
+                    <TextBox x:Name="EmpEditSurname" HorizontalAlignment="Left" Margin="242,80,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" Height="16"/>
+                    <TextBox x:Name="EmpEditTOC" HorizontalAlignment="Left" Margin="242,108,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" Height="16"/>
+                    <TextBox x:Name="EmpEditTitle" HorizontalAlignment="Left" Margin="242,144,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148" Height="16"/>
+                    <TextBox x:Name="EmpEditAddress" HorizontalAlignment="Left" Margin="125,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="174" Height="16" />
+                    <TextBox x:Name="EmpEditRegion" HorizontalAlignment="Left" Margin="125,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <TextBox x:Name="EmpEditCity" HorizontalAlignment="Left" Margin="125,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <TextBox x:Name="EmpEditCountry" HorizontalAlignment="Left" Margin="125,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <TextBox x:Name="EmpEditPostal" HorizontalAlignment="Left" Margin="125,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <TextBox x:Name="EmpEditPhone" HorizontalAlignment="Left" Margin="125,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <TextBox x:Name="EmpEditExt" HorizontalAlignment="Left" Margin="125,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" Height="16"/>
+                    <Button Content="Open" HorizontalAlignment="Left" Margin="131,432,0,0" VerticalAlignment="Top" Width="93" Click="OpenFile"/>
+                    <Button Content="GO" HorizontalAlignment="Center" Height="48" Margin="0,536,0,0" VerticalAlignment="Top" Width="380" Click="Run_Emp_Query"/>
+                    <Button Content="REMOVE" HorizontalAlignment="Center" Height="48" Margin="0,483,0,0" VerticalAlignment="Top" Width="380" Click="Delete_Emp_Query"/>
+
+                </Grid>
             </Border>
         </TabItem>
         <TabItem>

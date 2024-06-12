@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NorthwindApp
 {
@@ -33,6 +35,7 @@ namespace NorthwindApp
         CollectionViewSource orderViewSource;
         CollectionViewSource employeeViewSource;
         CollectionViewSource shipperViewSource;
+        byte[] data = new byte[0];
         public ObservableCollection<KeyValuePair<Product, short>> cartItems = new ObservableCollection<KeyValuePair<Product, short>>();
         public MainWindow()
         {
@@ -68,6 +71,7 @@ namespace NorthwindApp
             shipperViewSource.Source = context.Shippers.Local;
             
             this.SizeToContent = SizeToContent.Width;
+
             
         }
         private void NumberValidationTextBox_Double(object sender, TextCompositionEventArgs e)
@@ -87,12 +91,9 @@ namespace NorthwindApp
         private void NumberValidationTextBox_int(object sender, TextCompositionEventArgs e)
         {
             var textBox = sender as TextBox;
-            // Use SelectionStart property to find the caret position.
-            // Insert the previewed text into the existing text in the textbox.
             var fullText = textBox.Text.Insert(textBox.SelectionStart, e.Text);
 
             int val;
-            // If parsing is successful, set Handled to false
             e.Handled = !int.TryParse(fullText, out val);
         }
         #region item queries
@@ -316,10 +317,12 @@ namespace NorthwindApp
                         {
                             context.Customers.Remove(toRemove);
                             context.SaveChanges();
-                            productViewSource3.View.Refresh();
                         }
                     }
                     customerViewSource.View.Refresh();
+                    productViewSource3.View.Refresh();
+                    customerViewSource.View.Refresh();
+                    orderViewSource.View.Refresh();
                 }
                 catch (Exception ex)
                 {
@@ -330,11 +333,7 @@ namespace NorthwindApp
         }
         #endregion
         #region order queries
-        private void Order_New(object sender, MouseButtonEventArgs e)
-        { 
-           
-        }
-        #endregion
+        
 
         private void AddToCart(object sender, RoutedEventArgs e)
         {
@@ -351,7 +350,7 @@ namespace NorthwindApp
                     cartItems.Remove(toRemove);
                     cartItems.Add(new KeyValuePair<Product, short>(product, temp));
                 }
-                else 
+                else if(qty !=0 )
                 { 
                     cartItems.Add(new KeyValuePair<Product, short>(product, qty));
                 }
@@ -391,63 +390,56 @@ namespace NorthwindApp
                 decimal.TryParse(NewOrderFreight.Text, out freight);
                 float discount = 0;
                 float.TryParse(NewOrderDiscount.Text, out discount);
+                foreach(var prod in cartItems)
+                {
+                    if(context.Products.Find(prod.Key.ProductID).UnitsInStock < prod.Value)
+                    {
+                        throw new Exception($"Can't place an order for more items than are available in stock!\n{context.Products.Find(prod.Key.ProductID).UnitsInStock} units of {context.Products.Find(prod.Key.ProductID).ProductName} are available.");
+                    }
+                    context.Products.Find(prod.Key.ProductID).UnitsInStock -= prod.Value;
+                    context.SaveChanges();
+                    productViewSource3.View.Refresh();
+                }
 
-                /*                Order order = new Order()
-                                {
-                                    Customer = customer,
-                                    CustomerID = customer.CustomerID,
-                                    Employee = employee,
-                                    EmployeeID = employee.EmployeeID,
-                                    Freight = decimal.Parse(NewOrderFreight.Text),
-                                    OrderDate = DateTime.Now,
-                                    RequiredDate = NewOrderRequired.SelectedDate,
-                                    ShipAddress = NewOrderAddress.Text,
-                                    ShipCity = NewOrderCity.Text,
-                                    ShipRegion = NewOrderRegion.Text,
-                                    ShipCountry = NewOrderCountry.Text,
-                                    ShipName = NewOrderName.Text,
-                                    ShipPostalCode = NewOrderPostal.Text,
-                                    ShipVia = shipper.ShipperID
-                                };*/
-                Order order = new Order();
-
-                order.Customer = customer;
-                order.CustomerID = customer.CustomerID;
-                order.Employee = employee;
-                order.EmployeeID = employee.EmployeeID;
-                order.Freight = freight;
-                order.OrderDate = DateTime.Now;
-                order.RequiredDate = NewOrderRequired.SelectedDate;
-                order.ShipAddress = NewOrderAddress.Text;
-                order.ShipCity = NewOrderCity.Text;
-                order.ShipRegion = NewOrderRegion.Text;
-                order.ShipCountry = NewOrderCountry.Text;
-                order.ShipName = NewOrderName.Text;
-                order.ShipPostalCode = NewOrderPostal.Text;
-                order.ShipVia = shipper.ShipperID;
-                
+                Order order = new Order()
+                {
+                    Customer = customer,
+                    CustomerID = customer.CustomerID,
+                    Employee = employee,
+                    EmployeeID = employee.EmployeeID,
+                    Freight = freight,
+                    OrderDate = DateTime.Now,
+                    RequiredDate = NewOrderRequired.SelectedDate,
+                    ShipAddress = NewOrderAddress.Text,
+                    ShipCity = NewOrderCity.Text,
+                    ShipRegion = NewOrderRegion.Text,
+                    ShipCountry = NewOrderCountry.Text,
+                    ShipName = NewOrderName.Text,
+                    ShipPostalCode = NewOrderPostal.Text,
+                    ShipVia = shipper.ShipperID
+                };
                 List<Order_Detail> details = new List<Order_Detail>();
                 foreach (var item in cartItems) 
                 {
                     var detail = new Order_Detail();
                     detail.Discount = discount;
                     detail.Order = order;
-                        detail.OrderID = order.OrderID;
+                        
                         detail.Product = item.Key;
                         detail.ProductID = item.Key.ProductID;
                         detail.Quantity = item.Value;
                         detail.UnitPrice = (decimal)item.Key.UnitPrice;
                     details.Add(detail);
                 }
+                context.Orders.Add(order);
+                context.SaveChanges();
+
                 foreach (var det in details)
                 {
-                    order.Order_Details.Add(det);
+                    det.OrderID = order.OrderID;
                     context.Order_Details.Add(det);
                     context.SaveChanges();
                 }
-                //fix id issue
-                context.Orders.Add(order);
-                context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -457,7 +449,6 @@ namespace NorthwindApp
             }
 
         }
-
         private void CustomerAddressFill(object sender, SelectionChangedEventArgs e)
         {
             if(sender is  ComboBox box)
@@ -475,5 +466,177 @@ namespace NorthwindApp
 
             }
         }
+        #endregion
+        #region employee queries
+        private void EmployeeEdit(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (sender is DataGridRow row && row.Item != null)
+                {
+                    var employee = row.Item as Employee;
+                    var img = new ImageSourceConverter();
+                    try
+                    {
+                        image.Source = img.ConvertFrom(employee.Photo) as ImageSource;
+                    }
+                    catch 
+                    {
+                        image.Source = null;
+                    }
+                    EmpEditID.Text = employee.EmployeeID.ToString();
+                    EmpEditName.Text = employee.FirstName;
+                    EmpEditSurname.Text = employee.LastName;
+                    EmpEditTOC.Text = employee.TitleOfCourtesy;
+                    EmpEditTitle.Text = employee.Title;
+                    EmpEditAddress.Text = employee.Address;
+                    EmpEditRegion.Text = employee.Region;
+                    EmpEditCity.Text = employee.City;
+                    EmpEditCountry.Text = employee.Country;
+                    EmpEditPostal.Text = employee.PostalCode;
+                    EmpEditPhone.Text = employee.HomePhone;
+                    EmpEditExt.Text = employee.Extension;
+                }
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+        }
+
+        
+
+        private void OpenFile(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Photo";
+            dialog.DefaultExt = ".jpg";
+            dialog.Filter = "Photos (.jpg)|*.jpg";
+            bool? result = dialog.ShowDialog();
+            if(result == true)
+            {
+                string filename = dialog.FileName;
+                var imgfs = File.OpenRead(filename);
+                int length = Convert.ToInt32(imgfs.Length);
+                data = new byte[length];
+                imgfs.Read(data, 0, length);
+                imgfs.Close();
+                var img = new ImageSourceConverter();
+                image.Source = img.ConvertFrom(data) as ImageSource;
+            }
+        }
+
+        private void Run_Emp_Query(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var employee = new Employee()
+                {
+                    EmployeeID = int.Parse(EmpEditID.Text),
+                    FirstName = EmpEditName.Text,
+                    LastName = EmpEditSurname.Text,
+                    TitleOfCourtesy = EmpEditTOC.Text,
+                    Title = EmpEditTitle.Text,
+                    Address = EmpEditAddress.Text,
+                    Region = EmpEditRegion.Text,
+                    City = EmpEditCity.Text,
+                    Country = EmpEditCountry.Text,
+                    PostalCode = EmpEditPostal.Text,
+                    HomePhone = EmpEditPhone.Text,
+                    Extension = EmpEditExt.Text,
+                    Photo = data
+                };
+                if (context.Employees.Any(x => x.EmployeeID == employee.EmployeeID))
+                {
+                    var toUpdate = context.Employees.Find(employee.EmployeeID);
+                    toUpdate.FirstName = employee.FirstName;
+                    toUpdate.LastName = employee.LastName;
+                    toUpdate.TitleOfCourtesy = employee.TitleOfCourtesy;
+                    toUpdate.Title = employee.Title;
+                    toUpdate.Address = employee.Address;
+                    toUpdate.Region = employee.Region;
+                    toUpdate.City = employee.City;
+                    toUpdate.Country = employee.Country;
+                    toUpdate.PostalCode = employee.PostalCode;
+                    toUpdate.HomePhone = employee.HomePhone;
+                    toUpdate.Extension = employee.Extension;
+                    if(data.Length != 0) 
+                    {
+
+                        toUpdate.Photo = employee.Photo;
+                    }
+                    
+                    context.SaveChanges();
+                    
+                }
+                else
+                {
+                    context.Employees.Add(employee);
+                    context.SaveChanges();
+
+                }
+                employeeViewSource.View.Refresh();
+                data = new byte[0];
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Invalid values: " + ex.Message);
+            }
+        }
+        private void Delete_Emp_Query(object sender, RoutedEventArgs e)
+        {
+            var Result = MessageBox.Show($"Are you sure? \nThis action will delete the employee assigned to {EmpEditID.Text} and all orders created by this employee", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (Result == MessageBoxResult.Yes)
+            {
+                try
+                {
+
+                        Employee employee = new Employee()
+                        {
+                            EmployeeID = int.Parse(EmpEditID.Text)
+                        };
+                    var toRemove = context.Employees.Find(employee.EmployeeID);
+
+                    if (context.Orders.Any(x => x.EmployeeID == employee.EmployeeID))
+                    {
+                        var toRemoveOrders = context.Orders.Select(x => x).Where(x => x.EmployeeID == employee.EmployeeID).ToList();
+                        List<Order_Detail> toRemoveDetails = new List<Order_Detail>();
+                        if (toRemoveOrders != null)
+                        {
+                            foreach (var item in toRemoveOrders)
+                            {
+                                toRemoveDetails.Add(context.Order_Details.Select(x => x).Where(x => x.OrderID == item.OrderID).FirstOrDefault());
+                            }
+                            foreach (var item in toRemoveDetails)
+                            {
+                                if (item != null)
+                                { context.Order_Details.Remove(item); }
+                            }
+                            context.SaveChanges();
+                            foreach (var item in toRemoveOrders)
+                            {
+                                if (item != null)
+                                { context.Orders.Remove(item); }
+                            }
+                            context.SaveChanges();
+
+                        }
+                        if (toRemove != null)
+                        {
+                            context.Employees.Remove(toRemove);
+                            context.SaveChanges();
+                        }
+                    }
+                    employeeViewSource.View.Refresh();
+                    productViewSource3.View.Refresh();
+                    orderViewSource.View.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid ID: " + ex.Message);
+                }
+            }
+        }
+        #endregion
     }
 }
