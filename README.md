@@ -1,5 +1,9 @@
-<H1>Aplikacja Northwind</H1>
-<H2>Stworzona za pomocą C# WPF, zgodnie z zaleceniami wykorzystano localdb SQLSERVER, z racji tego przed próbą kompilacji należy zaimportować bazę danych (załączyłem formę SQL)
-przez otwarcie pliku Northwind.sql i wykonanie zapytania
+<H1>Northwind CRUD Desktop app</H1>
+
+<H2>Made using C# WPF technology, since it utilizes localdb, it's required to run the SQL database query first, the file is included with the project
 </H2>
-Oczywistym jest, że zainstalowane muszą być odpowiednie komponenty, mianowicie localdb dla Visual Studio, SQL Server Data Tools, SQL Server Express 2019 LocalDB, Data sources for SQL Server support
+Deps: 
+1. localdb for Visual Studio, 
+2. SQL Server Data Tools, 
+3. SQL Server Express 2019 LocalDB,
+4. Data sources for SQL Server support
