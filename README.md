@@ -4,6 +4,9 @@
 </H2>
 Deps: 
 1. localdb for Visual Studio
+
 2. SQL Server Data Tools,
+   
 3. SQL Server Express 2019 LocalDB,
-5. Data sources for SQL Server support
+   
+4. Data sources for SQL Server support
